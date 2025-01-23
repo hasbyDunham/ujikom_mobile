@@ -37,7 +37,6 @@ class ProfileView extends StatelessWidget {
                   // Avatar Profil atau Huruf Pertama Nama
                   CircleAvatar(
                     radius: 50,
-                    backgroundColor: const Color.fromARGB(255, 107, 146, 177),
                     backgroundImage: profile.avatar != null
                         ? NetworkImage(profile.avatar!)
                         : null,
