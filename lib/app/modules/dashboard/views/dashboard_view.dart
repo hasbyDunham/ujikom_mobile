@@ -32,7 +32,7 @@ Widget build(BuildContext context) {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Index',
+              label: 'Berita',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.event),

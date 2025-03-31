@@ -31,7 +31,7 @@ class HomeView extends GetView<HomeController> {
             height: 15,  
           ),
           Text(  
-            'Aplikasi Portal Berita Indonesia',  
+            'Fakultas Ushuluddin',  
             style: GoogleFonts.roboto(  
               textStyle: const TextStyle(  
                 fontWeight: FontWeight.bold,  
