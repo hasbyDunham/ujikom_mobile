@@ -1,22 +1,23 @@
 import 'package:get/get.dart';
 
-import '../modules/dashboard/bindings/dashboard_binding.dart';
-import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/berita/bindings/berita_binding.dart';
+import '../modules/berita/views/berita_view.dart';
+import '../modules/beritaF/bindings/berita_f_binding.dart';
+import '../modules/beritaF/views/berita_f_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
-// import '../modules/profile/bindings/profile_binding.dart';
-// import '../modules/dashboard/views/profile_view.dart';
-import '../modules/register/bindings/register_binding.dart';
-import '../modules/register/views/register_view.dart';
+import '../modules/pengumuman/bindings/pengumuman_binding.dart';
+import '../modules/pengumuman/views/pengumuman_view.dart';
+
+// import '../modules/pengumuman/bindings/pengumuman_binding.dart';
+// import '../modules/pengumuman/views/pengumuman_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.HOME; // Halaman awalnya Home
 
   static final routes = [
     GetPage(
@@ -25,24 +26,19 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.LOGIN,
-      page: () => LoginView(),
-      binding: LoginBinding(),
+      name: _Paths.BERITA,
+      page: () => BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
-      name: _Paths.REGISTER,
-      page: () => RegisterView(),
-      binding: RegisterBinding(),
+      name: _Paths.PENGUMUMAN,
+      page: () => PengumumanView(),
+      binding: PengumumanBinding(),
     ),
     GetPage(
-      name: _Paths.DASHBOARD,
-      page: () => DashboardView(),
-      binding: DashboardBinding(),
+      name: _Paths.BERITA_F,
+      page: () => BeritaFView(),
+      binding: BeritaFBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.PROFILE,
-    //   page: () => ProfileView(),
-    //   binding: ProfileBinding(),
-    // ),
   ];
 }
