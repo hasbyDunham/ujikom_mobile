@@ -1,6 +1,6 @@
-import 'package:aisha_crud2/app/utils/api.dart';
+import 'package:ujikom_mobile/app/utils/api.dart';
 import 'package:flutter/material.dart';
-import 'package:aisha_crud2/app/models/beritaF_model.dart';
+import 'package:ujikom_mobile/app/models/beritaF_model.dart';
 import 'package:intl/intl.dart';
 
 class DetailBeritaFView extends StatelessWidget {

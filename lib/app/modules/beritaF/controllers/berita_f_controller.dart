@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:aisha_crud2/app/models/beritaF_model.dart';
+import 'package:ujikom_mobile/app/models/beritaF_model.dart';
 
 class BeritaFController extends GetxController {
   var beritaFList = <BeritaFModel>[].obs;

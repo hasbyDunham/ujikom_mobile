@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:aisha_crud2/app/models/pengumuman_model.dart';
+import 'package:ujikom_mobile/app/models/pengumuman_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;

@@ -1,8 +1,8 @@
-import 'package:aisha_crud2/app/modules/home/views/home_view.dart';
+import 'package:ujikom_mobile/app/modules/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:aisha_crud2/app/utils/api.dart';
+import 'package:ujikom_mobile/app/utils/api.dart';
 
 class RegisterController extends GetxController {
   final _getConnect = GetConnect();

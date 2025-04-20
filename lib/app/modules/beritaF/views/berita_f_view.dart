@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:aisha_crud2/app/models/beritaF_model.dart';
-import 'package:aisha_crud2/app/modules/beritaF/views/detail_berita_f_view.dart';
-import 'package:aisha_crud2/app/modules/beritaF/controllers/berita_f_controller.dart';
-import 'package:aisha_crud2/app/utils/api.dart'; // untuk BaseUrl.storageBeritaF
+import 'package:ujikom_mobile/app/models/beritaF_model.dart';
+import 'package:ujikom_mobile/app/modules/beritaF/views/detail_berita_f_view.dart';
+import 'package:ujikom_mobile/app/modules/beritaF/controllers/berita_f_controller.dart';
+import 'package:ujikom_mobile/app/utils/api.dart'; // untuk BaseUrl.storageBeritaF
 
 class BeritaFView extends StatelessWidget {
   final BeritaFController controller = Get.put(BeritaFController());

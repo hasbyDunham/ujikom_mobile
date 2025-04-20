@@ -1,4 +1,4 @@
-import 'package:aisha_crud2/app/modules/register_gone/views/register_view.dart';
+import 'package:ujikom_mobile/app/modules/register_gone/views/register_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

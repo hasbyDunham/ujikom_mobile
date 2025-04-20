@@ -1,5 +1,5 @@
 import 'dart:io' show Platform;
-import 'package:aisha_crud2/app/utils/web_iframe_real.dart';
+import 'package:ujikom_mobile/app/utils/web_iframe_real.dart';
 import 'package:flutter/foundation.dart'; // kIsWeb
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart'; // WebView fallback

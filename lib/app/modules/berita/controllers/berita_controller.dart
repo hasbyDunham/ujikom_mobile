@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:aisha_crud2/app/models/berita_model.dart';
-import 'package:aisha_crud2/app/modules/berita/views/berita_view.dart';
+import 'package:ujikom_mobile/app/models/berita_model.dart';
+import 'package:ujikom_mobile/app/modules/berita/views/berita_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;

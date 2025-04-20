@@ -64,14 +64,14 @@
 //   }
 // }
 
-// import 'package:aisha_crud2/app/modules/berita/views/berita_view.dart';
-// import 'package:aisha_crud2/app/modules/beritaF/views/berita_f_view.dart';
-// // import 'package:aisha_crud2/app/modules/kontak/views/kontak_view.dart';
-// // import 'package:aisha_crud2/app/modules/lokasi/views/lokasi_view.dart';
-// import 'package:aisha_crud2/app/modules/pengumuman/controllers/pengumuman_controller.dart';
-// import 'package:aisha_crud2/app/modules/pengumuman/views/detail_pengumuman_view.dart';
-// import 'package:aisha_crud2/app/modules/pengumuman/views/pengumuman_view.dart';
-// // import 'package:aisha_crud2/app/modules/profil/views/profil_view.dart';
+// import 'package:ujikom_mobile/app/modules/berita/views/berita_view.dart';
+// import 'package:ujikom_mobile/app/modules/beritaF/views/berita_f_view.dart';
+// // import 'package:ujikom_mobile/app/modules/kontak/views/kontak_view.dart';
+// // import 'package:ujikom_mobile/app/modules/lokasi/views/lokasi_view.dart';
+// import 'package:ujikom_mobile/app/modules/pengumuman/controllers/pengumuman_controller.dart';
+// import 'package:ujikom_mobile/app/modules/pengumuman/views/detail_pengumuman_view.dart';
+// import 'package:ujikom_mobile/app/modules/pengumuman/views/pengumuman_view.dart';
+// // import 'package:ujikom_mobile/app/modules/profil/views/profil_view.dart';
 // // import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
@@ -271,15 +271,15 @@
 //   }
 // }
 
-import 'package:aisha_crud2/app/modules/berita/views/berita_view.dart';
-import 'package:aisha_crud2/app/modules/beritaF/views/berita_f_view.dart';
-import 'package:aisha_crud2/app/modules/kontak/views/kontak_view.dart';
-import 'package:aisha_crud2/app/modules/lokasi/views/lokasi_view.dart';
-import 'package:aisha_crud2/app/modules/pengumuman/controllers/pengumuman_controller.dart';
-import 'package:aisha_crud2/app/modules/pengumuman/views/detail_pengumuman_view.dart';
-import 'package:aisha_crud2/app/modules/pengumuman/views/pengumuman_view.dart';
-// import 'package:aisha_crud2/app/modules/profileF/views/profile_f_view.dart';
-import 'package:aisha_crud2/app/routes/app_pages.dart';
+import 'package:ujikom_mobile/app/modules/berita/views/berita_view.dart';
+import 'package:ujikom_mobile/app/modules/beritaF/views/berita_f_view.dart';
+import 'package:ujikom_mobile/app/modules/kontak/views/kontak_view.dart';
+import 'package:ujikom_mobile/app/modules/lokasi/views/lokasi_view.dart';
+import 'package:ujikom_mobile/app/modules/pengumuman/controllers/pengumuman_controller.dart';
+import 'package:ujikom_mobile/app/modules/pengumuman/views/detail_pengumuman_view.dart';
+import 'package:ujikom_mobile/app/modules/pengumuman/views/pengumuman_view.dart';
+// import 'package:ujikom_mobile/app/modules/profileF/views/profile_f_view.dart';
+import 'package:ujikom_mobile/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

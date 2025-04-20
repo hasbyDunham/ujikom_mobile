@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:aisha_crud2/app/models/berita_model.dart';
+import 'package:ujikom_mobile/app/models/berita_model.dart';
 
 class DetailBeritaView extends StatelessWidget {
   final BeritaModel berita;

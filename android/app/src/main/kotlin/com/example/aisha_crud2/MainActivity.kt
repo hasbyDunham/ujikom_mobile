@@ -1,4 +1,4 @@
-package com.example.aisha_crud2
+package com.example.ujikom_mobile
 
 import io.flutter.embedding.android.FlutterActivity
 
