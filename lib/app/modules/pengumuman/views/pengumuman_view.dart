@@ -1,5 +1,11 @@
+// PengumumanView dengan style mirip berita tapi beda nuansa
+import 'package:aisha_crud2/app/models/pengumuman_model.dart';
+import 'package:aisha_crud2/app/modules/pengumuman/views/detail_pengumuman_view.dart';
+import 'package:aisha_crud2/app/utils/api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../controllers/pengumuman_controller.dart';
 
 class PengumumanView extends StatelessWidget {
@@ -8,60 +14,118 @@ class PengumumanView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Pengumuman')),
+      backgroundColor: const Color(0xFFA4D4E4),
+      appBar: AppBar(
+        title: Text(
+          'Pengumuman',
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.blue.shade800,
+        centerTitle: true,
+        elevation: 4,
+      ),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (controller.pengumumanList.isEmpty) {
-          return const Center(child: Text('Tidak ada pengumuman tersedia'));
+
+        if (controller.errorMessage.isNotEmpty) {
+          return Center(child: Text(controller.errorMessage.value));
         }
+
+        if (controller.pengumumanList.isEmpty) {
+          return Center(
+            child: Text(
+              'Belum ada pengumuman',
+              style: GoogleFonts.poppins(color: Colors.grey),
+            ),
+          );
+        }
+
         return ListView.builder(
+          padding: const EdgeInsets.all(16),
           itemCount: controller.pengumumanList.length,
           itemBuilder: (context, index) {
-            var pengumuman = controller.pengumumanList[index];
-
-            return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: ListTile(
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: pengumuman.foto != null && pengumuman.foto!.isNotEmpty
-                      ? Image.network(
-                          'http://192.168.1.2:8000/storage/images/pengumuman/${pengumuman.foto}',
-                          width: 60,
-                          height: 60,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const SizedBox(
-                              width: 60,
-                              height: 60,
-                              child: Icon(Icons.broken_image, size: 30),
-                            );
-                          },
-                        )
-                      : const Icon(Icons.image_not_supported, size: 60),
-                ),
-                title: Text(
-                  pengumuman.judulPengumuman ?? 'Tanpa Judul',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                subtitle: Text(
-                  _stripHtmlTags(pengumuman.deskripsiPengumuman ?? 'Tidak ada deskripsi'),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            );
+            final pengumuman = controller.pengumumanList[index];
+            return _buildCard(pengumuman);
           },
         );
       }),
     );
   }
 
-  /// Fungsi untuk menghapus tag HTML dari teks
-  String _stripHtmlTags(String htmlText) {
-    return htmlText.replaceAll(RegExp(r'<[^>]*>'), '');
+  Widget _buildCard(PengumumanModel pengumuman) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => DetailPengumumanView(pengumuman: pengumuman));
+      },
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 4,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (pengumuman.foto != null && pengumuman.foto!.isNotEmpty)
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                child: CachedNetworkImage(
+                  imageUrl: "${BaseUrl.storagePengumuman}${pengumuman.foto}",
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.broken_image, size: 60),
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    pengumuman.judulPengumuman ?? 'Tanpa Judul',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF007399),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Text(
+                  //   pengumuman.deskripsiPengumuman ?? 'Tanpa Deskripsi',
+                  //   style: GoogleFonts.poppins(
+                  //     fontSize: 14,
+                  //     color: Colors.grey[700],
+                  //   ),
+                  //   maxLines: 3,
+                  //   overflow: TextOverflow.ellipsis,
+                  // ),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Selengkapnya',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF007399),
+                        ),
+                      ),
+                      const Icon(Icons.arrow_forward_ios, size: 12, color: Colors.orange),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

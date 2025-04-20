@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:aisha_crud2/app/models/beritaF_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-// import '../models/beritaF_model.dart'; // Sesuaikan path
+import 'package:aisha_crud2/app/models/beritaF_model.dart';
 
 class BeritaFController extends GetxController {
-  var beritaFList = <BeritaF>[].obs;
+  var beritaFList = <BeritaFModel>[].obs;
   var isLoading = true.obs;
+  var errorMessage = ''.obs;
 
   @override
   void onInit() {
@@ -15,22 +15,29 @@ class BeritaFController extends GetxController {
   }
 
   Future<void> fetchBeritaF() async {
+    isLoading.value = true;
+    errorMessage.value = ''; // Reset error
+
     try {
-      isLoading.value = true;
-      final response = await http.get(Uri.parse('http://192.168.1.2:8000/api/beritaF'));
+      final response = await http.get(Uri.parse('http://127.0.0.1:8000/api/beritaF'));
 
       if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
-
+        final jsonData = jsonDecode(response.body);
         if (jsonData['data'] != null) {
-          var beritaFData = jsonData['data'] as List;
+          final beritaFData = jsonData['data'] as List;
           beritaFList.assignAll(
-            beritaFData.map((e) => BeritaF.fromJson(e)).toList(),
+            beritaFData.map((e) => BeritaFModel.fromJson(e)).toList(),
           );
+        } else {
+          beritaFList.clear();
+          errorMessage.value = 'Data tidak ditemukan.';
         }
+      } else {
+        errorMessage.value = 'Gagal memuat data (${response.statusCode})';
       }
     } catch (e) {
-      print("❌ Error fetching berita fakultas: $e");
+      errorMessage.value = 'Terjadi kesalahan saat mengambil data';
+      print('❌ Error: $e');
     } finally {
       isLoading.value = false;
     }

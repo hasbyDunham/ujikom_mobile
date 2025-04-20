@@ -1,53 +1,44 @@
 import 'dart:convert';
-import 'package:aisha_crud2/app/models/news_image.dart';
+import 'package:aisha_crud2/app/models/berita_model.dart';
 import 'package:aisha_crud2/app/modules/berita/views/berita_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+// controllers/berita_controller.dart
 class BeritaController extends GetxController {
-  var newsList = <NewsModel>[].obs;
+  var beritaList = <BeritaModel>[].obs;
   var isLoading = true.obs;
-  final authToken = GetStorage();
+  var errorMessage = ''.obs;
 
   @override
   void onInit() {
+    fetchBerita();
     super.onInit();
-    fetchNews();
   }
 
-  Future<void> fetchNews() async {
+  Future<void> fetchBerita() async {
     try {
-      isLoading.value = true;
-
-      final response = await http.get(Uri.parse('http://192.168.1.2:8000/api/berita'));
-
-      print("🔹 Response Status Code: ${response.statusCode}");
-      print("🔹 Response Body: ${response.body}");
+      isLoading(true);
+      errorMessage('');
+      final response = await http.get(
+        Uri.parse('http://127.0.0.1:8000/api/berita'),
+        headers: {'Accept': 'application/json'},
+      );
 
       if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
-
-        if (jsonData != null && jsonData['data'] != null) {
-          var beritaList = jsonData['data'] as List;
-
-          if (beritaList.isNotEmpty) {
-            newsList.assignAll(
-              beritaList.map((e) => NewsModel.fromJson(e)).toList(),
-            );
-          } else {
-            print("⚠️ Data berita kosong.");
-          }
-        } else {
-          print("❌ Format JSON tidak sesuai.");
-        }
+        final data = json.decode(response.body);
+        beritaList.assignAll(
+          (data['data'] as List).map((e) => BeritaModel.fromJson(e)).toList()
+        );
       } else {
-        print("❌ Error mengambil data berita: ${response.statusCode}");
+        throw Exception('Failed to load berita: ${response.statusCode}');
       }
     } catch (e) {
-      print("❌ Exception saat fetch berita: $e");
+      errorMessage(e.toString());
+      Get.snackbar('Error', e.toString());
     } finally {
-      isLoading.value = false;
+      isLoading(false);
     }
   }
 }

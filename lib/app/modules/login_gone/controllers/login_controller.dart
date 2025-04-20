@@ -1,61 +1,48 @@
-// import 'package:get/get.dart';
-// import 'package:aisha_crud2/app/modules/dashboard/views/dashboard_view.dart';
-// import 'package:aisha_crud2/app/utils/api.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
-// import 'package:get_storage/get_storage.dart';
+import 'package:aisha_crud2/app/modules/home/views/home_view.dart';
+import 'package:get/get.dart';
+import 'package:aisha_crud2/app/utils/api.dart';
+import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
-// class LoginController extends GetxController {
-// final _getConnect = GetConnect();
-// TextEditingController emailController = TextEditingController();
-// TextEditingController passwordController = TextEditingController();
-// final authToken = GetStorage();//TODO: Implement LoginController
+class LoginController extends GetxController {
+  final _getConnect = GetConnect();
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
+  final authStorage = GetStorage();
 
-//   @override
-//   void onInit() {
-//     super.onInit();
-//   }
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
 
-//   @override
-//   void onReady() {
-//     super.onReady();
-//   }
+  void loginNow() async {
+    final response = await _getConnect.post(BaseUrl.login, {
+      'email': emailController.text,
+      'password': passwordController.text,
+    });
 
-//   @override
-//   void onClose() {
-//     emailController.dispose();
-// passwordController.dispose();
+    if (response.statusCode == 200 && response.body['access_token'] != null) {
+      // Simpan token
+      authStorage.write('token', response.body['access_token']);
+      
+      // Pindah ke HomeView
+      Get.offAll(() => HomeView());
+    } else {
+      final message = response.body['message'] ?? 'Login gagal. Cek email dan password.';
 
-//     super.onClose();
-//   }
-
-//  void loginNow() async { //fungsi _loginNow() dengan deklarasi kata kunci async
-//     final response = await _getConnect.post(BaseUrl.login, {
-//       'email': emailController.text, 
-//       'password': passwordController.text, 
-//     });
-
-//     if (response.statusCode == 200) {
-//       authToken.write('token', response.body['token']); 
-//       Get.offAll(() => const DashboardView());
-//     } else { 
-//       Get.snackbar(
-//         'Error',
-//         response.body['error'].toString(), 
-//         icon: const Icon(Icons.error), 
-//         backgroundColor: Colors.red, 
-//         colorText: Colors.white,
-//         forwardAnimationCurve: Curves.bounceIn, 
-//         margin: const EdgeInsets.only( 
-//           top: 10,
-//           left: 5,
-//           right: 5,
-//         ),
-//       );
-//     }
-//   }
-
-
-// }
+      Get.snackbar(
+        'Login Error',
+        message,
+        icon: const Icon(Icons.error, color: Colors.white),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        margin: const EdgeInsets.all(10),
+      );
+    }
+  }
+}

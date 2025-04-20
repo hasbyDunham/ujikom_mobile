@@ -1,4 +1,4 @@
-class Pengumuman {
+class PengumumanModel {
   int? id;
   int? userId;
   String? judulPengumuman;
@@ -6,7 +6,7 @@ class Pengumuman {
   String? foto;
   int? flag;
 
-  Pengumuman({
+  PengumumanModel({
     this.id,
     this.userId,
     this.judulPengumuman,
@@ -15,16 +15,21 @@ class Pengumuman {
     this.flag,
   });
 
-  factory Pengumuman.fromJson(Map<String, dynamic> json) {
-    return Pengumuman(
+  factory PengumumanModel.fromJson(Map<String, dynamic> json) {
+    return PengumumanModel(
       id: json['id'],
       userId: json['user_id'],
       judulPengumuman: json['judul_pengumuman'],
-      deskripsiPengumuman: json['deskripsi_pengumuman'],
+      // Membersihkan tag HTML dari deskripsi
+      deskripsiPengumuman: json['deskripsi_pengumuman']?.replaceAll(RegExp(r'<[^>]*>'), '') ?? 'Tidak ada deskripsi',
       foto: json['foto'],
       flag: json['flag'],
     );
   }
+
+  // Getter untuk URL gambar lengkap
+  String get fullImageUrl =>
+      'http://127.0.0.1:8000/storage/images/pengumuman/$foto';
 
   Map<String, dynamic> toJson() {
     return {

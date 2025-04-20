@@ -1,4 +1,4 @@
-class BeritaF {
+class BeritaFModel {
   int? id;
   int? userId;
   String? judulBeritaF;
@@ -6,7 +6,7 @@ class BeritaF {
   String? foto;
   int? flag;
 
-  BeritaF({
+  BeritaFModel({
     this.id,
     this.userId,
     this.judulBeritaF,
@@ -15,12 +15,12 @@ class BeritaF {
     this.flag,
   });
 
-  factory BeritaF.fromJson(Map<String, dynamic> json) {
-    return BeritaF(
+  factory BeritaFModel.fromJson(Map<String, dynamic> json) {
+    return BeritaFModel(
       id: json['id'],
       userId: json['user_id'],
       judulBeritaF: json['judul_beritaF'],
-      deskripsiF: json['deskripsiF'],
+      deskripsiF: json['deskripsiF']?.replaceAll(RegExp(r'<[^>]*>'), '') ?? 'Tidak ada deskripsi',
       foto: json['foto'],
       flag: json['flag'],
     );
